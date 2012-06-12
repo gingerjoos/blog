@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from models import Post
 
 def home(request):
-        posts = Post.objects.all()
+        posts = Post.objects.filter(is_published__exact=True).order_by('created_on')
         paginator = Paginator(posts,10)
 
         page = request.GET.get('page')

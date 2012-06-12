@@ -7,13 +7,20 @@ from django.contrib import admin
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields':['title','body']}),
-        ('Meta',{'fields':['is_published','comments_allowed','url','author'],'classes':['collapse']}),
+        ('Category',{'fields':['category']}),
+        ('Meta',{'fields':['is_published','comments_allowed','url','author']}),
     ]
 
     list_display = ('title','created_on','updated_on')
     list_filter = ('created_on','updated_on','is_published')
     search_fields = ['title']
     date_hierarchy = 'created_on'
+
+    def formfield_for_foreignkey(self,db_field,request,**kwargs):
+        if db_field.name == 'author':
+            kwargs['initial'] = request.user.id
+            return db_field.formfield(**kwargs)
+        return super(PostAdmin,self).formfield_for_foreignkey(db_field,request,**kwargs)
 
 
 admin.site.register(Post,PostAdmin)
