@@ -1,0 +1,12 @@
+{% extends 'master.html' %}
+
+{% load markup %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+{% for post in posts.object_list %}
+  <h2>{{ post.title }}</h2>
+  <div>{{ post.body|markdown }}</div>
+{% endfor %}
+{% endblock content %}

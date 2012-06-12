@@ -1,4 +1,17 @@
-from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from models import Post
 
-def home(kwargs):
-        return HttpResponse('test home')
+def home(request):
+        posts = Post.objects.all()
+        paginator = Paginator(posts,10)
+
+        page = request.GET.get('page')
+        try:
+                posts = paginator.page(posts)
+        except PageNotAnInteger:
+                posts = paginator.page(1)
+        except EmptyPage:
+                posts = paginator.page(paginator.num_pages)
+
+        return render_to_response('home.html',{'posts':posts})
