@@ -5,10 +5,11 @@ from django.contrib import admin
 #admin.site.register(Post)
 
 class PostAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
     fieldsets = [
         (None,{'fields':['title','body']}),
         ('Category',{'fields':['category']}),
-        ('Meta',{'fields':['is_published','comments_allowed','url','author']}),
+        ('Meta',{'fields':['is_published','comments_allowed','slug','author']}),
     ]
 
     list_display = ('title','created_on','updated_on')

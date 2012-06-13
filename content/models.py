@@ -9,7 +9,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     is_published = models.BooleanField(default=True)
     comments_allowed = models.BooleanField(default=True)
-    url = models.URLField(blank=True,null=True)
+    slug = models.SlugField()
     author = models.ForeignKey(User)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
