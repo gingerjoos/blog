@@ -16,3 +16,6 @@ def home(request):
                 posts = paginator.page(paginator.num_pages)
 
         return render_to_response('home.html',{'posts':posts})
+
+def view_post(request,kwargs):
+        pass

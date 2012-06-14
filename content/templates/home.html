@@ -6,7 +6,7 @@
 
 {% block content %}
 {% for post in posts.object_list %}
-  <h2>{{ post.title }}</h2>
+  <h2><a href="{% url 'content.views.view_post' post.slug post.category.slug %}" title="{{ post.title }}">{{ post.title }}</a></h2>
   <div>{{ post.body|markdown }}</div>
 {% endfor %}
 {% endblock content %}
