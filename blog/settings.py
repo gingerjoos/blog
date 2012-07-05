@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'content',
     'taxonomy',
+    'pages',
 )
 
 # A sample logging configuration. The only tangible logging
