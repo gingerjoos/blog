@@ -6,7 +6,15 @@
 
 {% block content %}
 {% for post in posts.object_list %}
-  <h2><a href="{% url 'content.views.view_post' post.slug post.category.slug %}" title="{{ post.title }}">{{ post.title }}</a></h2>
+  <h2><a href="#" title="{{ post.title }}">{{ post.title }}</a></h2>
   <div>{{ post.body|markdown }}</div>
 {% endfor %}
+<ul class="pager">
+	{% if posts.has_previous %}
+	<li class="previous"><a href="?page={{ posts.previous_page_number }}">&larr; Older</a></li>
+	{% endif %}
+	{% if posts.has_next %}
+	<li class="next"><a href="?page={{ posts.next_page_number }}">Newer &rarr;</a></li>
+	{% endif %}
+</ul>
 {% endblock content %}

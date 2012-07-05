@@ -5,11 +5,11 @@ from models import Post
 def home(request):
         posts = Post.objects.filter(is_published__exact=True).order_by('created_on')
         # TODO : take the figure below from settings
-        paginator = Paginator(posts,10)
+        paginator = Paginator(posts,2)
 
         page = request.GET.get('page')
         try:
-                posts = paginator.page(posts)
+                posts = paginator.page(page)
         except PageNotAnInteger:
                 posts = paginator.page(1)
         except EmptyPage:
